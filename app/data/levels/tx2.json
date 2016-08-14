@@ -1,0 +1,102 @@
+{
+  "name": "Level 2",
+  "origin": [
+	5,
+	5
+  ],
+  "layout": [
+	{
+	  "material": "images/stone-block.png"
+	},
+	{
+	  "material": "images/stone-block.png",
+	  "reverse": true,
+	  "speed": 1.8,
+	  "enemies": [
+		{
+		  "delay": 4,
+		  "type": ["SportsCar", "MuscleCar"]
+		},
+		{
+		  "delay": 8,
+		  "type": ["SportsCar", "ClassicCar"]
+		},
+		{
+		  "delay": 10,
+		  "type": ["Taxi", "MuscleCar", "ClassicCar"]
+		}
+	  ]
+	},
+	{
+	  "material": "images/grass-block.png",
+	  "reverse": true,
+	  "speed": 1.4,
+	  "enemies": [
+		{
+		  "delay": 1,
+		  "type": [
+			"Bug"
+		  ]
+		},
+		{
+		  "delay": 5,
+		  "type": [
+			"Bug"
+		  ]
+		},
+		{
+		  "delay": 8,
+		  "type": [
+			"Bug"
+		  ]
+		}
+	  ]
+	},
+	{
+	  "material": "images/stone-block.png",
+	  "speed": 2,
+	  "enemies": [
+		{
+		  "delay": 3,
+		  "type": [
+			"Police"
+		  ]
+		},
+		{
+		  "delay": 5,
+		  "type": [
+			"Police"
+		  ]
+		},
+		{
+		  "delay": 8,
+		  "type": ["Truck", "Van", "Pickup"]
+		}
+	  ]
+	},
+	{
+	  "material": "images/stone-block.png",
+	  "speed": 2.6,
+	  "enemies": [
+		{
+		  "delay": 1,
+		  "mode": 1,
+		  "type": [
+			"SportsCar"
+		  ]
+		},
+		{
+		  "delay": 4,
+		  "mode": 1,
+		  "type": [
+			"Police"
+		  ]
+		}
+	  ]
+	},
+	{
+	  "material": "images/grass-block.png"
+	}
+  ],
+  "startFrame": 3
+}

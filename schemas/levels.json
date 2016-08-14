@@ -1,0 +1,88 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+	"name": {
+	  "description": "Name used for level in game",
+	  "type": "string"
+	},
+	"origin": {
+	  "description": "Starting position of player",
+	  "type": "array",
+	  "items": {
+		"description": "Coordinate of player (x, then y)",
+		"type": "integer"
+	  },
+	  "minItems": 2,
+	  "maxItems": 2
+	},
+	"layout": {
+	  "description": "Array of level rows and enemies",
+	  "type": "array",
+	  "items": {
+		"description": "Level row object",
+		"type": "object",
+		"properties": {
+		  "material": {
+			"description": "Material to paint as background",
+			"type": "string"
+		  },
+		  "reverse": {
+			"description": "Do enemies move in reverse on this row",
+			"type": "boolean"
+		  },
+		  "speed": {
+			"description": "Speed multiplier of enemies on this row",
+			"type": "number"
+		  },
+		  "enemies": {
+			"description": "Array of enemy entities on this row",
+			"type": "array",
+			"items": {
+			  "description": "Enemy object",
+			  "type": "object",
+			  "properties": {
+				"delay": {
+				  "description": "How many ticks before enemy appears",
+				  "type": "number"
+				},
+				"mode": {
+				  "description": "Entity mode to be passed to constructor",
+				  "type": "number"
+				},
+				"type": {
+				  "description": "Array of entities to use for this row",
+				  "type": "array",
+				  "items": {
+					"description": "Entity class name",
+					"type": "string"
+				  },
+				  "minItems": 1,
+				  "uniqueItems": true
+				}
+			  },
+			  "required": [
+				"delay",
+				"type"
+			  ]
+			},
+			"minItems": 1
+		  }
+		},
+		"required": [
+		  "material"
+		]
+	  }
+	},
+	"startFrame": {
+	  "description": "Ticks to skip before start",
+	  "type": "integer"
+	}
+  },
+  "required": [
+	"name",
+	"origin",
+	"layout",
+	"startFrame"
+  ]
+}

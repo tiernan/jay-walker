@@ -1,0 +1,54 @@
+﻿Initial Commit
+
+Jay Walker v1
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch and 'origin/master' have diverged,
+# and have 1 and 3 different commits each, respectively.
+#   (use "git pull" to merge the remote branch into yours)
+#
+# Changes to be committed:
+#	new file:   .eslintrc
+#	modified:   .gitignore
+#
+# Changes not staged for commit:
+#	modified:   README.md
+#	deleted:    css/style.css
+#	deleted:    images/Gem Blue.png
+#	deleted:    images/Gem Green.png
+#	deleted:    images/Gem Orange.png
+#	deleted:    images/Heart.png
+#	deleted:    images/Key.png
+#	deleted:    images/Rock.png
+#	deleted:    images/Selector.png
+#	deleted:    images/Star.png
+#	deleted:    images/char-boy.png
+#	deleted:    images/char-cat-girl.png
+#	deleted:    images/char-horn-girl.png
+#	deleted:    images/char-pink-girl.png
+#	deleted:    images/char-princess-girl.png
+#	deleted:    images/enemy-bug.png
+#	deleted:    images/grass-block.png
+#	deleted:    images/stone-block.png
+#	deleted:    images/water-block.png
+#	deleted:    index.html
+#	deleted:    js/app.js
+#	deleted:    js/engine.js
+#	deleted:    js/resources.js
+#
+# Untracked files:
+#	app/
+#	custom_modules/
+#	custom_typings/
+#	dist/
+#	gulpfile.js
+#	package.json
+#	schemas/
+#	tsconfig.json
+#	tslint.json
+#	typings.json
+#
+

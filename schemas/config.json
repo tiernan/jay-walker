@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+	"width": {
+	  "description": "Width in cells of game levels",
+	  "type": "integer",
+	  "minimum": 5
+	},
+	"height": {
+	  "description": "Height in cells of game levels",
+	  "type": "integer",
+	  "minimum": 5
+	},
+	"cellWidth": {
+	  "description": "Width in pixels of game cells",
+	  "type": "integer"
+	},
+	"cellHeight": {
+	  "description": "Height in pixels of game cells",
+	  "type": "integer"
+	},
+	"cellOffsetX": {
+	  "description": "X offset in pixels to center of cells",
+	  "type": "integer"
+	},
+	"cellOffsetY": {
+	  "description": "X offset in pixels to center of cells",
+	  "type": "integer"
+	},
+	"baseSpeed": {
+	  "description": "Base speed multiplier of game",
+	  "type": "integer"
+	},
+	"levels": {
+	  "description": "Array of level config files",
+	  "type": "array",
+	  "items": {
+		"type": "string"
+	  },
+	  "minItems": 1,
+	  "uniqueItems": true
+	}
+  },
+  "required": [
+	"width",
+	"height",
+	"cellWidth",
+	"cellHeight",
+	"cellOffsetX",
+	"cellOffsetY",
+	"baseSpeed",
+	"levels"
+  ]
+}

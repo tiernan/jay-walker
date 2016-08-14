@@ -1,0 +1,44 @@
+{
+  "author": {
+    "email": "olohmann@gmail.com",
+    "name": "Oliver Lohmann",
+    "url": "http://www.oliver-lohmann.me/"
+  },
+  "bugs": {
+    "url": "https://github.com/olohmann/gulp-filenames-to-json/issues"
+  },
+  "dependencies": {
+    "escape-string-regexp": "^1.0.5",
+    "gulp-util": "^3.0.4",
+    "slash": "^1.0.0",
+    "through2": "^0.6.5"
+  },
+  "description": "Simple gulp plugin that creates a JSON file containing the relative filenames of all piped files as an array.",
+  "devDependencies": {
+    "mocha": "*"
+  },
+  "directories": {},
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "gulpplugin"
+  ],
+  "license": "MIT",
+  "maintainers": [
+    {
+      "email": "olohmann@gmail.com",
+      "name": "olohmann"
+    }
+  ],
+  "name": "gulp-filenames-to-json",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "scripts": {
+    "test": "mocha"
+  },
+  "version": "0.1.2"
+}

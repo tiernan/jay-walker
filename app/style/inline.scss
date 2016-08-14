@@ -1,0 +1,68 @@
+$stageWidth: 1010px;
+$stageHeight: 606px;
+
+body {
+  margin: 0;
+  text-align: center;
+  font-family: sans-serif;
+}
+
+#stage {
+  margin: 0 auto;
+  position: relative;
+  width: 100%;
+  max-height: $stageHeight;
+  max-width: $stageWidth;
+}
+
+.layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.layer, .background {
+  width: 100%;
+  max-width: $stageWidth;
+}
+
+#text {
+  z-index: 3;
+}
+
+#fg {
+  z-index: 2;
+}
+
+#bg {
+  z-index: 1;
+}
+
+#fps-display {
+  width: 10em;
+  height: 2em;
+  font-weight: bold;
+  overflow: hidden;
+}
+
+#fps-display::after {
+  content: " fps";
+}
+
+@media screen and (max-width: 500px) {
+  body {
+	font-size: 2em;
+  }
+}
+
+@media screen and (max-width: 1009px) {
+  #message::after {
+	content: "Warning: Your screen size is unsupported. The recommended screen size is 1010px wide or larger.";
+  }
+}
+
+@media screen and (min-width: 1010px) {
+  #stage {
+	width: $stageWidth;
+  }
+}
