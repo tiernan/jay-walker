@@ -77,7 +77,7 @@ Use the arrow keys to navigate around the playing field.
 
 You can modify the levels and/or create new levels by changing the JSON files under the src/data directory.
 
-JSON Schema's are provided to validate against in the /schema directory.
+JSON Schema's are provided to validate against in the /schemas directory.
 
 After modification, you should rebuild the distribution build by using the `gulp build` command in an NPM enabled terminal. (See 'How to Run Locally with Gulp' steps 1-4 above to install Gulp and dependencies)
 
