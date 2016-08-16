@@ -67,10 +67,11 @@ type ServiceWorkerState = "installing" | "installed" | "activating" | "activated
 interface Cache {
 	add(request: Request): Promise<void>;
 	addAll(requestArray: Array<Request>): Promise<void>;
+	'delete'(request: Request, options?: CacheStorageOptions): Promise<boolean>;
 	keys(request?: Request, options?: CacheStorageOptions): Promise<Array<string>>;
 	match(request: Request, options?: CacheStorageOptions): Promise<Response>;
 	matchAll(request: Request, options?: CacheStorageOptions): Promise<Array<Response>>;
-	put(request: Request, response: Response): Promise<void>;
+	put(request: Request|string, response: Response): Promise<void>;
 }
 
 interface CacheStorage {
@@ -135,8 +136,15 @@ interface FetchEvent extends Event {
 	respondWith(response: Promise<Response>|Response): Promise<Response>;
 }
 
+interface InstallEvent extends ExtendableEvent {
+	activeWorker: ServiceWorker;
+}
+
+interface ActivateEvent extends ExtendableEvent {
+}
+
 interface Headers {
-	new(init: any): Headers;
+	new(init?: any): Headers;
 	append(name: string, value: string): void;
 	'delete'(name: string): void;
 	entries(): Array<Array<string>>;
@@ -144,12 +152,22 @@ interface Headers {
 	getAll(name: string): Array<string>;
 	has(name: string): boolean;
 	keys(): Array<string>;
-	set(name: string, value: string);
+	set(name: string, value: string): void;
 	values(): Array<string>;
 }
 
 interface Request extends Body {
-	new(url: string): Request;
+	new(url: string, init?: {
+		method?: string,
+		url?: string,
+		referrer?: string,
+		mode?: RequestMode,
+		credentials?: RequestCredentials,
+		redirect?: RequestRedirect,
+		integrity?: string,
+		cache?: RequestCache,
+		headers?: Headers
+	}): Request;
 	cache: RequestCache;
 	credentials: RequestCredentials;
 	headers: Headers;
@@ -165,19 +183,25 @@ interface Request extends Body {
 
 interface Response extends Body {
 	new(url: string): Response;
+	new(body: Blob|BufferSource|FormData|String, init: {
+		status?: number,
+		statusText?: string,
+		headers?: Headers|{ [k: string]: string }
+	}): Response;
 	headers: Headers;
 	ok: boolean;
 	redirected: boolean;
 	status: number;
+	statusText: string;
 	type: ResponseType;
 	url: string;
 	useFinalURL: boolean;
 	clone(): Response;
 	error(): Response;
-	json(): Promise<any>;
 	redirect(): Response;
 }
 
+type BufferSource = ArrayBuffer | ArrayBufferView;
 type ReferrerPolicy = "" | "no-referrer" | "no-referrer-when-downgrade" | "origin-only" | "origin-when-cross-origin" |
 	"unsafe-url";
 type RequestCache = "default" | "no-store" | "reload" | "no-cache" | "force-cache";
@@ -242,6 +266,7 @@ interface SyncEvent extends Event {
 
 // ServiceWorkerGlobalScope
 
+declare var Headers: Headers;
 declare var Response: Response;
 declare var Request: Request;
 declare var caches: CacheStorage;
