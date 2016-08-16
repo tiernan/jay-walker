@@ -9,3 +9,4 @@ if ('serviceWorker' in navigator) {
         console.log('ServiceWorker registration failed: ', err);
     });
 }
+//# sourceMappingURL=register-worker.js.map

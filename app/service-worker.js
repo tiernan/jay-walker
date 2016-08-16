@@ -66,3 +66,4 @@ self.addEventListener('fetch', function (event) {
         });
     }));
 });
+//# sourceMappingURL=service-worker.js.map
