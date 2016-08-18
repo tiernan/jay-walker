@@ -165,7 +165,7 @@ namespace JayWalker {
 		}
 
 		public render(context: CanvasRenderingContext2D): void {
-			context.drawImage(Resources.get(this.sprite), this.spriteW * this.frame, this.spriteH * this.set,
+			context.drawImage(JayWalker.Resources.get(this.sprite), this.spriteW * this.frame, this.spriteH * this.set,
 				this.spriteW, this.spriteH, this.x, this.y, this.spriteW, this.spriteH);
 		}
 	}
@@ -641,6 +641,11 @@ namespace JayWalker {
 
 			this.context.font = weight + ' ' + size + 'pt ' + family;
 			this.lineHeight = Math.round(size + size * .4);
+		}
+
+		public color(foregroundColor: string, strokeColor: string): void {
+			this.context.fillStyle = foregroundColor;
+			this.context.strokeStyle = strokeColor;
 		}
 
 		public drawLives(lives: number|string): void {
