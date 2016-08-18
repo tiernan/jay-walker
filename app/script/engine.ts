@@ -84,10 +84,11 @@ namespace JayWalker {
 
 	// Set font and display loading text while we finish up here
 	tm.style(48, 'Impact');
+	tm.color('#f70', '#000');
 	tm.pauseQueue('Loading...');
 
 	// background fill black for now
-	bgCtx.fillStyle = "#000";
+	bgCtx.fillStyle = "#fff";
 	bgCtx.fillRect(0, 0, stageWidth, stageHeight);
 
 	// functions specifically set whether user input should be listened to or not
@@ -118,7 +119,7 @@ namespace JayWalker {
 		}
 	}
 
-	// Add listener for tab losing focus
+	// add listener for tab losing focus
 	d.addEventListener("visibilitychange", handleVisibilityChange, false);
 
 	// helps pause the game when user has changed tabs
@@ -617,6 +618,7 @@ namespace JayWalker {
 		d.addEventListener('keydown', userInputDown);
 		d.addEventListener('keyup', userInputUp);
 		tm.pauseQueue('Jay Walker\nHit ENTER to play');
+		tm.color('#fff', '#000');
 	}
 
 	// Tests requestAnimation frame for high precision time
@@ -732,7 +734,7 @@ namespace JayWalker {
 	}
 
 	// Pre-load all game assets
-	Resources.preload([
+	JayWalker.Resources.preload([
 		'images/stone-block.png',
 		'images/water-block.png',
 		'images/grass-block.png',
