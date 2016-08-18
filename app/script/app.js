@@ -507,6 +507,10 @@ var JayWalker;
             this.context.font = weight + ' ' + size + 'pt ' + family;
             this.lineHeight = Math.round(size + size * .4);
         };
+        TitleManager.prototype.color = function (foregroundColor, strokeColor) {
+            this.context.fillStyle = foregroundColor;
+            this.context.strokeStyle = strokeColor;
+        };
         TitleManager.prototype.drawLives = function (lives) {
             this.context.save();
             // save the old line height, because we're not going to call style from this function
