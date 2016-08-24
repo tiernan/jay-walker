@@ -43,10 +43,10 @@ body {
   height: 2em;
   font-weight: bold;
   overflow: hidden;
-}
 
-#fps-display::after {
-  content: " fps";
+  ::after {
+    content: " fps";
+  }
 }
 
 @media screen and (max-width: 500px) {

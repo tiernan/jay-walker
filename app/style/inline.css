@@ -33,18 +33,17 @@ body {
   height: 2em;
   font-weight: bold;
   overflow: hidden; }
-
-#fps-display::after {
-  content: " fps"; }
+  #fps-display ::after {
+    content: " fps"; }
 
 @media screen and (max-width: 500px) {
   body {
     font-size: 2em; } }
-
 @media screen and (max-width: 1009px) {
   #message::after {
     content: "Warning: Your screen size is unsupported. The recommended screen size is 1010px wide or larger."; } }
-
 @media screen and (min-width: 1010px) {
   #stage {
     width: 1010px; } }
+
+/*# sourceMappingURL=inline.css.map */
