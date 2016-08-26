@@ -9,27 +9,10 @@
 	"Promise": true
   },
   "rules": {
-	"indent": [
-	  "error",
-	  "tab"
-	],
-	"linebreak-style": [
-	  "error",
-	  "unix"
-	],
-	"no-unused-vars": [
-	  "error",
-	  {
-		"vars": "local"
-	  }
-	],
-//	"quotes": [
-//	  "error",
-//	  "double"
-//	],
-	"semi": [
-	  "error",
-	  "always"
-	]
+	"indent": ["off"],
+	"linebreak-style": ["error", "unix"],
+	"no-unused-vars": ["error", {"vars": "local"}],
+	"quotes": [2, "single", {"avoidEscape": true, "allowTemplateLiterals": true}],
+	"semi": ["error", "always"]
   }
 }
