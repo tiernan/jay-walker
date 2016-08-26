@@ -15,7 +15,7 @@
  * @email tiernanc@gmail.com
  * @license: ISC
  */
-"use strict";
+'use strict';
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -48,7 +48,7 @@ var JayWalker;
             case 'https:':
                 var XHR_1 = new XMLHttpRequest();
                 // override MIME in case server is misconfigured.
-                XHR_1.overrideMimeType("application/json");
+                XHR_1.overrideMimeType('application/json');
                 XHR_1.open('GET', url, true);
                 // Note: add after open to save cycles
                 XHR_1.onreadystatechange = function () {
@@ -188,7 +188,7 @@ var JayWalker;
     JayWalker.Player = Player;
     setDims.call(Player.prototype, 67, 77, null, 88);
     setCenter.call(Player.prototype, 0, -10);
-    Player.prototype.names = ["you"];
+    Player.prototype.names = ['you'];
     // enemy entity
     var Enemy = (function (_super) {
         __extends(Enemy, _super);

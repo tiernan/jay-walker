@@ -1,5 +1,5 @@
 /// <reference path="../custom_typings/service-worker.ts" />
-"use strict";
+'use strict';
 var version = '0.1.0';
 var manifest = 'files-manifest.json';
 self.addEventListener('install', function (event) {
@@ -9,8 +9,8 @@ self.addEventListener('install', function (event) {
             return fetch(preloadRequest).then(function (response) {
                 if (response.ok) {
                     cache.put(preloadRequest, response.clone());
-                    var contentType = response.headers.get("content-type");
-                    if (contentType && contentType.indexOf("application/json") !== -1) {
+                    var contentType = response.headers.get('content-type');
+                    if (contentType && contentType.indexOf('application/json') !== -1) {
                         return response.json().then(function (json) {
                             return cache.addAll(json);
                         }).catch(function () {
@@ -20,12 +20,12 @@ self.addEventListener('install', function (event) {
                         });
                     }
                     else {
-                        console.log("Warning: Manifest Content-Type mismatch.");
+                        console.log('Warning: Manifest Content-Type mismatch.');
                         return Promise.resolve();
                     }
                 }
                 else {
-                    console.log("Notice: No manifest present; presuming dev version.");
+                    console.log('Notice: No manifest present; presuming dev version.');
                     return Promise.resolve();
                 }
             }).catch(function (error) {

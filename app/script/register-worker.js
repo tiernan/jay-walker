@@ -1,5 +1,5 @@
 /// <reference path="../../custom_typings/service-worker.ts" />
-"use strict";
+'use strict';
 // check if service worker API is available
 if ('serviceWorker' in navigator) {
     // register service worker

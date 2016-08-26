@@ -15,7 +15,7 @@
  * @email tiernanc@gmail.com
  * @license: ISC
  */
-"use strict";
+'use strict';
 if (!Promise) {
     throw new Error('Browser unsupported');
 }
@@ -63,7 +63,7 @@ var JayWalker;
     tm.color('#f70', '#000');
     tm.pauseQueue('Loading...');
     // background fill black for now
-    bgCtx.fillStyle = "#fff";
+    bgCtx.fillStyle = '#fff';
     bgCtx.fillRect(0, 0, stageWidth, stageHeight);
     // functions specifically set whether user input should be listened to or not
     function disableInput() {
@@ -89,7 +89,7 @@ var JayWalker;
         }
     }
     // add listener for tab losing focus
-    d.addEventListener("visibilitychange", handleVisibilityChange, false);
+    d.addEventListener('visibilitychange', handleVisibilityChange, false);
     // helps pause the game when user has changed tabs
     function handleVisibilityChange() {
         if (d.hidden) {
@@ -205,7 +205,7 @@ var JayWalker;
                 break;
             case 57:
                 if (!userVictory && running) {
-                    console.log("CHEATER!");
+                    console.log('CHEATER!');
                     userCheated = true;
                     lives++;
                     tm.drawLives(lives);
@@ -428,8 +428,8 @@ var JayWalker;
             tm.drawLives(--lives);
             tm.pauseQueue([
                 generateLoseTitle(player, enemy),
-                (lives) ? "Try again?" : "GAME OVER"
-            ].join("\n"));
+                (lives) ? 'Try again?' : 'GAME OVER'
+            ].join('\n'));
         }
     }
     // generates random caption for player death using various enemy names/actions
@@ -453,12 +453,12 @@ var JayWalker;
             else {
                 // No more levels so enable victory mode
                 userVictory = true;
-                tm.drawLives("\u221E");
+                tm.drawLives('\u221E');
                 if (userCheated) {
-                    tm.pauseQueue("YOU CHEATED!\nTry again without cheats!");
+                    tm.pauseQueue('YOU CHEATED!\nTry again without cheats!');
                 }
                 else {
-                    tm.pauseQueue("YOU WON!");
+                    tm.pauseQueue('YOU WON!');
                 }
             }
         }

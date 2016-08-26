@@ -3,16 +3,15 @@
   "rules": {
 	"align": [true, "statements"],
 	"comment-format": false,
-	"eofline": false,
-	"indent": [
-	  "tabs"
-	],
+	"eofline": true,
+	"indent": ["tabs"],
 	"interface-name": false,
 	"no-console": false,
 	"no-constructor-vars": true,
 	"no-namespace": false,
 	"no-reference": false,
-	"quotemark": false,
+	"only-arrow-functions": false,
+	"quotemark": [true, "single", "avoid-escape"],
 	"trailing-comma": false,
 	"typedef": [
 	  true,
@@ -23,8 +22,7 @@
 	  "variable-declaration",
 	  "member-variable-declaration"
 	],
-	"typedef-whitespace":
-	[
+	"typedef-whitespace": [
 	  true,
 	  {
 		"call-signature": "nospace",

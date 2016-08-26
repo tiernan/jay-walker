@@ -15,7 +15,7 @@
  * @email tiernanc@gmail.com
  * @license: ISC
  */
-"use strict";
+'use strict';
 
 namespace JayWalker {
 	interface ConfigData {
@@ -85,7 +85,7 @@ namespace JayWalker {
 			case 'https:':
 				let XHR: XMLHttpRequest = new XMLHttpRequest();
 				// override MIME in case server is misconfigured.
-				XHR.overrideMimeType("application/json");
+				XHR.overrideMimeType('application/json');
 				XHR.open('GET', url, true);
 
 				// Note: add after open to save cycles
@@ -268,7 +268,7 @@ namespace JayWalker {
 
 	setDims.call(Player.prototype, 67, 77, null, 88);
 	setCenter.call(Player.prototype, 0, -10);
-	Player.prototype.names = ["you"];
+	Player.prototype.names = ['you'];
 
 	// enemy entity
 	export abstract class Enemy extends MovingEntity implements Drawable {

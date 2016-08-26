@@ -15,7 +15,7 @@
  * @email tiernanc@gmail.com
  * @license: ISC
  */
-"use strict";
+'use strict';
 
 if (!Promise) {
 	throw new Error('Browser unsupported');
@@ -105,7 +105,7 @@ namespace JayWalker {
 	tm.pauseQueue('Loading...');
 
 	// background fill black for now
-	bgCtx.fillStyle = "#fff";
+	bgCtx.fillStyle = '#fff';
 	bgCtx.fillRect(0, 0, stageWidth, stageHeight);
 
 	// functions specifically set whether user input should be listened to or not
@@ -137,7 +137,7 @@ namespace JayWalker {
 	}
 
 	// add listener for tab losing focus
-	d.addEventListener("visibilitychange", handleVisibilityChange, false);
+	d.addEventListener('visibilitychange', handleVisibilityChange, false);
 
 	// helps pause the game when user has changed tabs
 	function handleVisibilityChange(): void {
@@ -258,7 +258,7 @@ namespace JayWalker {
 				break;
 			case 57: // #9
 				if (!userVictory && running) {
-					console.log("CHEATER!");
+					console.log('CHEATER!');
 					userCheated = true;
 					lives++;
 					tm.drawLives(lives);
@@ -513,8 +513,8 @@ namespace JayWalker {
 			tm.drawLives(--lives);
 			tm.pauseQueue([
 				generateLoseTitle(player, enemy),
-				(lives) ? "Try again?" : "GAME OVER"
-			].join("\n"));
+				(lives) ? 'Try again?' : 'GAME OVER'
+			].join('\n'));
 		}
 	}
 
@@ -539,11 +539,11 @@ namespace JayWalker {
 			} else {
 				// No more levels so enable victory mode
 				userVictory = true;
-				tm.drawLives("\u221E");
+				tm.drawLives('\u221E');
 				if (userCheated) {
-					tm.pauseQueue("YOU CHEATED!\nTry again without cheats!");
+					tm.pauseQueue('YOU CHEATED!\nTry again without cheats!');
 				} else {
-					tm.pauseQueue("YOU WON!");
+					tm.pauseQueue('YOU WON!');
 				}
 			}
 		}

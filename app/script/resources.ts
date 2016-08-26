@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 namespace JayWalker {
 	export namespace Resources {
 		interface ResourceArray {
