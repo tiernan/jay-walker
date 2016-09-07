@@ -298,8 +298,8 @@ namespace JayWalker {
 		}
 	}
 
-	Enemy.prototype.names = ["P.E. #1", "Rude Boy", "Natasha", "Careless Driver"];
-	Enemy.prototype.actions = ["hit", "ran over", "crashed into"];
+	Enemy.prototype.names = ['P.E. #1', 'Rude Boy', 'Natasha', 'Careless Driver'];
+	Enemy.prototype.actions = ['hit', 'ran over', 'crashed into'];
 
 	// bug entity
 	export class Bug extends Enemy implements Drawable {
@@ -310,8 +310,8 @@ namespace JayWalker {
 
 	setDims.call(Bug.prototype, 98, 64, 99, 77);
 	setCenter.call(Bug.prototype, -15, -10);
-	Bug.prototype.names = ["Buster Bugsy", "Dung Beetle #1", "Dung Beetle #2", "Your Worst Nightmare", "Beetlejuice"];
-	Bug.prototype.actions = ["slimed", "ate", "bit"];
+	Bug.prototype.names = ['Buster Bugsy', 'Dung Beetle #1', 'Dung Beetle #2', 'Your Worst Nightmare', 'Beetlejuice'];
+	Bug.prototype.actions = ['slimed', 'ate', 'bit'];
 
 	// classic car entity
 	export class ClassicCar extends Enemy implements Drawable {
@@ -322,7 +322,7 @@ namespace JayWalker {
 
 	setDims.call(ClassicCar.prototype, 148, 63);
 	adjustRadius.call(ClassicCar.prototype, -1, -1);
-	ClassicCar.prototype.names = ["Jay Leno", "80's Guy", "The Fonz"];
+	ClassicCar.prototype.names = ['Jay Leno', "80's Guy", 'The Fonz'];
 
 	// muscle car entity
 	export class MuscleCar extends Enemy implements Drawable {
@@ -333,7 +333,7 @@ namespace JayWalker {
 
 	setDims.call(MuscleCar.prototype, 147, 69);
 	adjustRadius.call(MuscleCar.prototype, -1, -3);
-	MuscleCar.prototype.names = ["Clint Eastwood", "Toretto", "Burt Reynolds", "Stirling Archer"];
+	MuscleCar.prototype.names = ['Clint Eastwood', 'Toretto', 'Burt Reynolds', 'Stirling Archer'];
 
 	// taxi entity
 	export class Taxi extends Enemy implements Drawable {
@@ -344,7 +344,7 @@ namespace JayWalker {
 
 	setDims.call(Taxi.prototype, 146, 75);
 	adjustRadius.call(Taxi.prototype, 0, -3);
-	Taxi.prototype.names = ["Benny", "Travis Bickle", "Max", "Corky"];
+	Taxi.prototype.names = ['Benny', 'Travis Bickle', 'Max', 'Corky'];
 
 	// van entity
 	export class Van extends Enemy implements Drawable {
@@ -356,7 +356,7 @@ namespace JayWalker {
 	setDims.call(Van.prototype, 150, 69);
 	setCenter.call(Van.prototype, -10, 0);
 	adjustRadius.call(Van.prototype, -1, -10);
-	Van.prototype.names = ["Krieger"];
+	Van.prototype.names = ['Krieger'];
 
 	// lorry entity
 	export class Truck extends Enemy implements Drawable {
@@ -368,7 +368,7 @@ namespace JayWalker {
 	setDims.call(Truck.prototype, 298, 80);
 	setCenter.call(Truck.prototype, 60, 0);
 	adjustRadius.call(Truck.prototype, -2, -6);
-	Truck.prototype.names = ["Bob", "Larry"];
+	Truck.prototype.names = ['Bob', 'Larry'];
 
 	// truck entity
 	export class Pickup extends Enemy implements Drawable {
@@ -379,7 +379,7 @@ namespace JayWalker {
 
 	setDims.call(Pickup.prototype, 148, 79);
 	adjustRadius.call(Pickup.prototype, -1, -4);
-	Pickup.prototype.names = ["Mike", "Brent"];
+	Pickup.prototype.names = ['Mike', 'Brent'];
 
 	// car chase generic enemy
 	abstract class CarChaseEnemy extends Enemy implements Drawable {
@@ -493,14 +493,14 @@ namespace JayWalker {
 	setDims.call(Police.prototype, 150, 69);
 	Police.prototype.frameRate = 10;
 	Police.prototype.names = [
-		"Officer McDonuts",
-		"Chief Wiggum",
-		"David Starsky",
-		"Kenneth Hutchinson",
-		"Debrah Morgan",
-		"Sergeant Batista"
+		'Officer McDonuts',
+		'Chief Wiggum',
+		'David Starsky',
+		'Kenneth Hutchinson',
+		'Debrah Morgan',
+		'Sergeant Batista'
 	];
-	Police.prototype.actions = ["busted", "caught", "hit", "crashed into", "arrested"];
+	Police.prototype.actions = ['busted', 'caught', 'hit', 'crashed into', 'arrested'];
 
 	// canvas building factory
 	//noinspection JSUnusedLocalSymbols
@@ -582,10 +582,10 @@ namespace JayWalker {
 
 		constructor(context: CanvasRenderingContext2D) {
 			context.textBaseline = 'middle';
-			context.textAlign = "center";
+			context.textAlign = 'center';
 			context.lineWidth = 3;
-			context.strokeStyle = "#000";
-			context.fillStyle = "#fff";
+			context.strokeStyle = '#000';
+			context.fillStyle = '#fff';
 
 			this.hudHeight = 40;
 			this.lineHeight = 6;
@@ -615,7 +615,7 @@ namespace JayWalker {
 				timeout = 3;
 			}
 
-			this.queue.push({callback: callback, text: text, timeout: timeout});
+			this.queue.push({callback, text, timeout});
 
 			if (!this.current) {
 				this._nextText();
@@ -673,8 +673,8 @@ namespace JayWalker {
 
 			this.style(20, 'Arial');
 			this.context.clearRect(this.context.canvas.width / 2, 0, this.context.canvas.width / 2, this.hudHeight);
-			this.context.strokeText("x " + lives, this.context.canvas.width - 40, 25);
-			this.context.fillText("x " + lives, this.context.canvas.width - 40, 25);
+			this.context.strokeText('x ' + lives, this.context.canvas.width - 40, 25);
+			this.context.fillText('x ' + lives, this.context.canvas.width - 40, 25);
 			this.context.restore();
 
 			// restore old line height
@@ -687,7 +687,7 @@ namespace JayWalker {
 			}
 
 			let height: number = this.lineHeight;
-			let lines: Array<string> = text.split("\n");
+			let lines: Array<string> = text.split('\n');
 			let centerWidth: number = this.context.canvas.width / 2;
 			let offsetHeight: number = this.context.canvas.height / 2 - (lines.length - 1) * height / 2;
 
