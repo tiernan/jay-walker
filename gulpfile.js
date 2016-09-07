@@ -125,8 +125,16 @@ gulp.task('files-manifest', ['copy-favicon', 'html', 'icons', 'images', 'minify-
 		.pipe(gulp.dest(BUILD));
 });
 
+gulp.task('compile-super', ['sass', 'type-script']);
+
 // Build
-gulp.task('build', ['convert-json-data', 'files-manifest', 'minify-service']);
+gulp.task('build', ['compile-super'], function() {
+	gulp.start('build-no-compile');
+});
+
+// Build without compiling TypeScript or Sass
+// This is for use with an IDE that already compiles these for you.
+gulp.task('build-no-compile', ['convert-json-data', 'files-manifest', 'minify-service']);
 
 // Run local web server
 gulp.task('web-server', function() {
