@@ -1,3 +1,4 @@
+'use strict';
 var BUILD = 'dist/',
 	NS = 'JayWalker',
 	SOURCE = 'app/',
@@ -14,8 +15,8 @@ var BUILD = 'dist/',
 	prettyData = require('gulp-pretty-data'),
 	rename = require('gulp-rename'),
 	sass = require('gulp-sass'),
-	typeScript = require("gulp-typescript"),
-	tsProject = typeScript.createProject("tsconfig.json"),
+	typeScript = require('gulp-typescript'),
+	tsProject = typeScript.createProject('tsconfig.json'),
 	useMin = require('gulp-usemin');
 
 // Converts JSON data files to JS scripts under application namespace
@@ -82,14 +83,14 @@ gulp.task('sass', function () {
 });
 
 // Compile TypeScript
-gulp.task("type-script", function () {
+gulp.task('type-script', function () {
 	return tsProject.src(SOURCE + '**/*.ts')
 		.pipe(typeScript(tsProject))
 		.js.pipe(gulp.dest(SOURCE));
 });
 
 // Minify HTML and compile script/css builds
-gulp.task('html', ['sass', 'type-script'], function() {
+gulp.task('html', function() {
 	return gulp.src(SOURCE + '*.html')
 		.pipe(useMin({
 			css: [minifyCSS],
