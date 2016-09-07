@@ -10,14 +10,14 @@ body {
   max-height: 606px;
   max-width: 1010px; }
 
+.background, .layer {
+  width: 100%;
+  max-width: 1010px; }
+
 .layer {
   position: absolute;
   top: 0;
   left: 0; }
-
-.layer, .background {
-  width: 100%;
-  max-width: 1010px; }
 
 #text {
   z-index: 3; }
@@ -33,7 +33,7 @@ body {
   height: 2em;
   font-weight: bold;
   overflow: hidden; }
-  #fps-display ::after {
+  #fps-display::after {
     content: " fps"; }
 
 @media screen and (max-width: 500px) {

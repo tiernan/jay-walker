@@ -15,15 +15,16 @@ body {
   max-width: $stageWidth;
 }
 
+.background {
+  width: 100%;
+  max-width: $stageWidth;
+}
+
 .layer {
+  @extend .background;
   position: absolute;
   top: 0;
   left: 0;
-}
-
-.layer, .background {
-  width: 100%;
-  max-width: $stageWidth;
 }
 
 #text {
@@ -44,7 +45,7 @@ body {
   font-weight: bold;
   overflow: hidden;
 
-  ::after {
+  &::after {
     content: " fps";
   }
 }
