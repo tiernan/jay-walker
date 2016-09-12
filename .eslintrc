@@ -9,6 +9,7 @@
 	"Promise": true
   },
   "rules": {
+	"eol-last": ["off"],
 	"indent": ["off"],
 	"linebreak-style": ["error", "unix"],
 	"no-unused-vars": ["error", {"vars": "local"}],
