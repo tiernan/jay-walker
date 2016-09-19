@@ -308,31 +308,26 @@ namespace JayWalker {
 			case KEY_DOWN: // down
 				userKeys[e.keyCode] = false;
 				break;
-				baseSpeed = 1.2;
-				difficultyOffset = -5;
 			case KEY_1:
 				console.log(LOG_MODE_HARD);
+				setDifficulty(0);
 				break;
-				baseSpeed = 1;
-				difficultyOffset = 0;
 			case KEY_2:
 				console.log(LOG_MODE_NORMAL);
+				setDifficulty(1);
 				break;
-				baseSpeed = 1;
-				difficultyOffset = 6;
 			case KEY_3:
 				console.log(LOG_MODE_EASY);
+				setDifficulty(2);
 				break;
-				baseSpeed = 0.8;
-				difficultyOffset = 12;
 			case KEY_4:
 				console.log(LOG_MODE_WIMP);
+				setDifficulty(3);
 				break;
 			case KEY_5:
 				console.log(LOG_MODE_GOD);
 				userCheated = true;
-				baseSpeed = 1;
-				difficultyOffset = 500;
+				setDifficulty(4);
 				break;
 			case KEY_6:
 				bloodEnabled = !bloodEnabled;
