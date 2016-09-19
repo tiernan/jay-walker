@@ -33,6 +33,12 @@ interface GamePosition {
 }
 
 namespace JayWalker {
+
+	interface Difficulty {
+		margin: number;
+		speed: number;
+	}
+
 	interface Origin {
 		[index: number]: number;
 	}
@@ -60,6 +66,89 @@ namespace JayWalker {
 		speed: number;
 		reverse: boolean;
 	}
+
+	// constants
+	const COLOR_BG: string = '#fff';
+	const COLOR_FILL: string = '#fff';
+	const COLOR_FILL_SPLASH: string = '#f70';
+	const COLOR_STROKE: string = '#000';
+
+	const FONT_FAMILY: string = 'Impact';
+	const FONT_SIZE: number = 48;
+
+	const KEY_1: number = 49;
+	const KEY_2: number = 50;
+	const KEY_3: number = 51;
+	const KEY_4: number = 52;
+	const KEY_5: number = 53;
+	const KEY_6: number = 54;
+	const KEY_7: number = 55;
+	const KEY_8: number = 56;
+	const KEY_9: number = 57;
+	const KEY_DOWN: number = 40;
+	const KEY_ENTER: number = 13;
+	const KEY_ESCAPE: number = 27;
+	const KEY_LEFT: number = 37;
+	const KEY_RIGHT: number = 39;
+	const KEY_SPACE: number = 32;
+	const KEY_UP: number = 38;
+
+	const LOG_BAD_FPS: string = 'Severe FPS drop!';
+	const LOG_CHEATER: string = 'CHEATER!';
+	const LOG_DISABLED: string = 'Disabled';
+	const LOG_ENABLED: string = 'Enabled';
+	const LOG_KEY_INVALID: string = 'Invalid key: ';
+	const LOG_LOOP_MAIN: string = 'Using high resolution main loop';
+	const LOG_LOOP_SUPPORT: string = 'Using support main loop';
+	const LOG_MODE_BIT: string = '8-bit Mode ';
+	const LOG_MODE_BLOOD: string = 'Blood ';
+	const LOG_MODE_EASY: string = 'Easy Mode Enabled';
+	const LOG_MODE_GOD: string = 'God Mode Enabled';
+	const LOG_MODE_HARD: string = 'Hard Mode Enabled';
+	const LOG_MODE_NORMAL: string = 'Normal Mode Enabled';
+	const LOG_MODE_TRAILS: string = 'Leave Trails ';
+	const LOG_MODE_WIMP: string = 'Wimp Mode Enabled';
+	const LOG_OUT_OF_SYNC: string = 'Out of sync, skipping frames!';
+	const LOG_PRELOAD_FAILED: string = 'failed preload';
+
+	const NUM_BIT_FACTOR: number = .25;
+	const NUM_MIN_FPS: number = 45;
+	const NUM_SECOND: number = 1000;
+
+	const SETTINGS_DIFFICULTY: Array<Difficulty> = [
+		{
+			margin: -5,
+			speed: 1.2
+		},
+		{
+			margin: 0,
+			speed: 1
+		},
+		{
+			margin: 6,
+			speed: 1
+		},
+		{
+			margin: 12,
+			speed: .8
+		},
+		{
+			margin: 500,
+			speed: 1
+		}
+	];
+
+	const TEXT_GAME_OVER: string = 'GAME OVER';
+	const TEXT_GO: string = 'Go';
+	const TEXT_INFINITY: string = '\u221E';
+	const TEXT_LOADING: string = 'Loading...';
+	const TEXT_PAUSE: string = '-PAUSED-';
+	const TEXT_READY: string = 'Ready';
+	const TEXT_SET: string = 'Set';
+	const TEXT_SPLASH: string = 'Jay Walker\nHit ENTER to play';
+	const TEXT_RETRY: string = 'Try again?';
+	const TEXT_VICTORY: string = 'YOU WON!';
+	const TEXT_VICTORY_CHEATER: string = 'YOU CHEATED!\nTry again without cheats!';
 
 	// shortcut variable scope
 	let w: Window = window;
@@ -100,12 +189,12 @@ namespace JayWalker {
 	let bitCtx: CanvasRenderingContext2D;
 
 	// Set font and display loading text while we finish up here
-	tm.style(48, 'Impact');
-	tm.color('#f70', '#000');
-	tm.pauseQueue('Loading...');
+	tm.style(FONT_SIZE, FONT_FAMILY);
+	tm.color(COLOR_FILL_SPLASH, COLOR_STROKE);
+	tm.pauseQueue(TEXT_LOADING);
 
 	// background fill black for now
-	bgCtx.fillStyle = '#fff';
+	bgCtx.fillStyle = COLOR_BG;
 	bgCtx.fillRect(0, 0, stageWidth, stageHeight);
 
 	// functions specifically set whether user input should be listened to or not
@@ -150,9 +239,9 @@ namespace JayWalker {
 
 	// displays ready set go text when user respawns, or starts
 	function startText(): void {
-		tm.queueText('Ready', 1);
-		tm.queueText('Set', 1, enableInput);
-		tm.queueText('Go', 1);
+		tm.queueText(TEXT_READY, 1);
+		tm.queueText(TEXT_SET, 1, enableInput);
+		tm.queueText(TEXT_GO, 1);
 	}
 
 	/* User functions */
@@ -176,24 +265,30 @@ namespace JayWalker {
 	// handles user input downPress
 	function userInputDown(e: KeyboardEvent): void {
 		switch (e.keyCode) {
-			case 37: // left
-			case 38: // up
-			case 39: // right
-			case 40: // down
+			case KEY_LEFT:
+			case KEY_UP:
+			case KEY_RIGHT:
+			case KEY_DOWN:
 				if (inputEnabled) {
 					userKeys[e.keyCode] = true;
 				}
 				break;
 			default:
+				// no op
 				break;
 		}
+	}
+
+	function setDifficulty(difficultyLevel: number): void {
+		difficultyOffset = SETTINGS_DIFFICULTY[difficultyLevel].margin;
+		baseSpeed = SETTINGS_DIFFICULTY[difficultyLevel].speed;
 	}
 
 	// handles user input upPress
 	function userInputUp(e: KeyboardEvent): void {
 		switch (e.keyCode) {
-			case 13: // enter
-			case 32: // space
+			case KEY_ENTER:
+			case KEY_SPACE:
 				// full reset if user has won, game hasn't begun, or out of lives
 				if (userVictory || !started || !lives) {
 					gameReset();
@@ -202,53 +297,53 @@ namespace JayWalker {
 					respawn();
 				}
 				return;
-			case 27: // escape
+			case KEY_ESCAPE: // escape
 				if (started && userLive && !userVictory) {
 					userPause();
 				}
 				return;
-			case 37: // left
-			case 38: // up
-			case 39: // right
-			case 40: // down
+			case KEY_LEFT: // left
+			case KEY_UP: // up
+			case KEY_RIGHT: // right
+			case KEY_DOWN: // down
 				userKeys[e.keyCode] = false;
 				break;
-			case 49: // #1
-				console.log('Hard Mode Enabled');
 				baseSpeed = 1.2;
 				difficultyOffset = -5;
+			case KEY_1:
+				console.log(LOG_MODE_HARD);
 				break;
-			case 50: // #2
-				console.log('Normal Mode Enabled');
 				baseSpeed = 1;
 				difficultyOffset = 0;
+			case KEY_2:
+				console.log(LOG_MODE_NORMAL);
 				break;
-			case 51: // #3
-				console.log('Easy Mode Enabled');
 				baseSpeed = 1;
 				difficultyOffset = 6;
+			case KEY_3:
+				console.log(LOG_MODE_EASY);
 				break;
-			case 52: // #4
-				console.log('Wimp Mode Enabled');
 				baseSpeed = 0.8;
 				difficultyOffset = 12;
+			case KEY_4:
+				console.log(LOG_MODE_WIMP);
 				break;
-			case 53: // #5
-				console.log('God Mode Enabled');
+			case KEY_5:
+				console.log(LOG_MODE_GOD);
 				userCheated = true;
 				baseSpeed = 1;
 				difficultyOffset = 500;
 				break;
-			case 54: // #6
+			case KEY_6:
 				bloodEnabled = !bloodEnabled;
 				renderBg(); // clear blood if there
-				console.log('Blood ' + ((bloodEnabled) ? 'Enabled' : 'Disabled'));
+				console.log(LOG_MODE_BLOOD + ((bloodEnabled) ? LOG_ENABLED : LOG_DISABLED));
 				break;
-			case 55: // #7
+			case KEY_7:
 				clearRedraw = !clearRedraw;
-				console.log('Leave Trails ' + ((clearRedraw) ? 'Disabled' : 'Enabled'));
+				console.log(LOG_MODE_TRAILS + ((clearRedraw) ? LOG_DISABLED : LOG_ENABLED));
 				break;
-			case 56: // #8
+			case KEY_8:
 				if (bitCtx) {
 					disableLowRes();
 				} else {
@@ -256,24 +351,24 @@ namespace JayWalker {
 				}
 
 				break;
-			case 57: // #9
+			case KEY_9:
 				if (!userVictory && running) {
-					console.log('CHEATER!');
+					console.log(LOG_CHEATER);
 					userCheated = true;
 					lives++;
 					tm.drawLives(lives);
 				}
 				break;
 			default:
-				console.log('Invalid key: ' + e.keyCode);
+				console.log(LOG_KEY_INVALID + e.keyCode);
 		}
 	}
 
 	// a fun low-res filter, access by press #8 in game
 	function enableLowRes(): void {
-		console.log('8-bit Mode Enabled');
+		console.log(LOG_MODE_BIT + LOG_ENABLED);
 		// create a smaller canvas to pixelate our images on
-		bitCtx = cf.createCanvas('bit', true, .25);
+		bitCtx = cf.createCanvas('bit', true, NUM_BIT_FACTOR);
 		// must disable image smoothing for this effect
 		bitCtx.mozImageSmoothingEnabled = false;
 		bitCtx.webkitImageSmoothingEnabled = false;
@@ -290,7 +385,7 @@ namespace JayWalker {
 
 	// disabling and cleaning up the low res filter
 	function disableLowRes(): void {
-		console.log('8-bit Mode Disabled');
+		console.log(LOG_MODE_BIT + LOG_DISABLED);
 		// destroy the small canvas
 		bitCtx = null;
 		// reset image smoothing
@@ -312,7 +407,7 @@ namespace JayWalker {
 			resume();
 		} else {
 			userPaused = true;
-			tm.pauseQueue('-PAUSED-');
+			tm.pauseQueue(TEXT_PAUSE);
 			pause();
 		}
 	}
@@ -347,13 +442,13 @@ namespace JayWalker {
 	function main(now: number): void {
 		let lastID: number = frameID;
 		computeFPS(now);
-		update((now - lastTime) / 1000);
+		update((now - lastTime) / NUM_SECOND);
 		render();
 		lastTime = now;
 
 		if (lastID !== frameID) {
 			// a new frame began before we ended our loop, warn!
-			console.log('Out of sync, skipping frames!');
+			console.log(LOG_OUT_OF_SYNC);
 		} else if (running) {
 			// proceed as normal
 			frameID = w.requestAnimationFrame(main);
@@ -367,12 +462,12 @@ namespace JayWalker {
 
 	// Compute FPS every second and display
 	function computeFPS(now: number): void {
-		if (now > lastFpsUpdate + 1000) {
+		if (now > lastFpsUpdate + NUM_SECOND) {
 			fps = framesThisSecond;
 			lastFpsUpdate = now;
 			framesThisSecond = 0;
-			if (fps < 45) {
-				console.log('Severe FPS drop!');
+			if (fps < NUM_MIN_FPS) {
+				console.log(LOG_BAD_FPS);
 			}
 			fpsDisplay.textContent = String(fps);
 		} else {
@@ -391,7 +486,6 @@ namespace JayWalker {
 	// update entities
 	function updateEntities(dt: number): void {
 		// less GC than using .forEach
-		// Using for loop against Udacity coding style
 		for (let i: number = 0, l: number = allEnemies.length; i < l; i++) {
 			updateEntity(allEnemies[i], dt);
 		}
@@ -513,7 +607,7 @@ namespace JayWalker {
 			tm.drawLives(--lives);
 			tm.pauseQueue([
 				generateLoseTitle(player, enemy),
-				(lives) ? 'Try again?' : 'GAME OVER'
+				(lives) ? TEXT_RETRY : TEXT_GAME_OVER
 			].join('\n'));
 		}
 	}
@@ -539,11 +633,11 @@ namespace JayWalker {
 			} else {
 				// No more levels so enable victory mode
 				userVictory = true;
-				tm.drawLives('\u221E');
+				tm.drawLives(TEXT_INFINITY);
 				if (userCheated) {
-					tm.pauseQueue('YOU CHEATED!\nTry again without cheats!');
+					tm.pauseQueue(TEXT_VICTORY_CHEATER);
 				} else {
-					tm.pauseQueue('YOU WON!');
+					tm.pauseQueue(TEXT_VICTORY);
 				}
 			}
 		}
@@ -607,7 +701,7 @@ namespace JayWalker {
 	// render individual row of BG
 	function renderBgRow(row: number): void {
 		for (let col: number = 0; col < gridW; col++) {
-			bgCtx.drawImage(Resources.get(layout[row]), col * 101, row * 83);
+			bgCtx.drawImage(Resources.get(layout[row]), col * JayWalker.gridCellWidth, row * JayWalker.gridCellHeight);
 		}
 	}
 
@@ -634,17 +728,17 @@ namespace JayWalker {
 		w.requestAnimationFrame(testRAF);
 		d.addEventListener('keydown', userInputDown);
 		d.addEventListener('keyup', userInputUp);
-		tm.pauseQueue('Jay Walker\nHit ENTER to play');
-		tm.color('#fff', '#000');
+		tm.pauseQueue(TEXT_SPLASH);
+		tm.color(COLOR_FILL, COLOR_STROKE);
 	}
 
 	// Tests requestAnimation frame for high precision time
 	function testRAF(now?: number): void {
 		if (now) {
-			console.log('Using high resolution main loop');
+			console.log(LOG_LOOP_MAIN);
 			loop = main;
 		} else {
-			console.log('Using support main loop');
+			console.log(LOG_LOOP_SUPPORT);
 			loop = supportMain;
 		}
 	}
@@ -674,10 +768,6 @@ namespace JayWalker {
 		loadJSON('data/' + levels[level], load);
 	}
 
-	/**
-	 * @param {{format:number, name:string, width:number, height:number, layout:Array,
-	 * origin:Array, enemies:Array startFrame:number}} levelData
-	 */
 	// load level data and create entities
 	function load(levelData: LevelData): void {
 		started = true;
@@ -720,10 +810,6 @@ namespace JayWalker {
 	// adds row sprite to layout array, then processes enemies
 	function loadLevelRow(row: LayoutRow, rowNumber: number): void {
 		// add sprite to draw for bg
-		/**
-		 * @property row.material Tile sprite
-		 * @property row.enemies Enemy array
-		 */
 		layout[rowNumber] = row.material;
 
 		// if enemies on row, process them
@@ -743,9 +829,6 @@ namespace JayWalker {
 			let type: string = randomArrayElement(enemy.type);
 			allEnemies.push(
 				createEntity(type, enemy.delay, rowNumber, row.speed, row.reverse, enemy.mode) as Enemy
-				// new JayWalker[type](
-				// 	enemy.delay, rowNumber, row.speed, row.reverse, enemy.mode
-				// )
 			);
 		}
 	}
@@ -767,6 +850,6 @@ namespace JayWalker {
 		'images/classic-car.png',
 		'images/blood.png'
 	]).then(init, function (): void {
-		console.log('failed preload');
+		console.log(LOG_PRELOAD_FAILED);
 	});
 }
