@@ -30,7 +30,7 @@ All current desktop browsers are supported. The application uses JavaScript Prom
 
 There are three ways to run this application.
 
-- Open [dist/index.html](dist/index.html) locally in your favourite browser.
+- Build then open [dist/index.html](dist/index.html) locally in your favourite browser.
 - Use gulp to serve the files locally.
 - Access a live version at [udacity.tiernanx.com/fewd/arcade/](http://udacity.tiernanx.com/fewd/arcade/)
 
