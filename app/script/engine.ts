@@ -282,15 +282,15 @@ namespace JayWalker {
 					respawn();
 				}
 				return;
-			case KEY_ESCAPE: // escape
+			case KEY_ESCAPE:
 				if (started && userLive && !userVictory) {
 					userPause();
 				}
 				return;
-			case KEY_LEFT: // left
-			case KEY_UP: // up
-			case KEY_RIGHT: // right
-			case KEY_DOWN: // down
+			case KEY_LEFT:
+			case KEY_UP:
+			case KEY_RIGHT:
+			case KEY_DOWN:
 				userKeys[e.keyCode] = false;
 				break;
 			case KEY_1:
@@ -780,7 +780,7 @@ namespace JayWalker {
 		// adds the 'Ready, Set, Go'
 		startText();
 
-		// render bg/player and launch start the loop
+		// render bg/player and start the loop
 		renderBg();
 		render();
 		userLive = true;
