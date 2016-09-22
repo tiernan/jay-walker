@@ -93,8 +93,8 @@ namespace JayWalker {
 	const KEY_SPACE: number = 32;
 	const KEY_UP: number = 38;
 
-	const LOG_BAD_FPS: string = 'Severe FPS drop!';
 	const LOG_1UP: string = '1-Up!';
+	const LOG_BAD_FPS: string = 'Severe FPS drop!';
 	const LOG_DISABLED: string = 'Disabled';
 	const LOG_ENABLED: string = 'Enabled';
 	const LOG_KEY_INVALID: string = 'Invalid key: ';
