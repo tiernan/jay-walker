@@ -65,26 +65,11 @@ var JayWalker;
     var NUM_MIN_FPS = 45;
     var NUM_SECOND = 1000;
     var SETTINGS_DIFFICULTY = [
-        {
-            margin: -5,
-            speed: 1.2
-        },
-        {
-            margin: 0,
-            speed: 1
-        },
-        {
-            margin: 6,
-            speed: 1
-        },
-        {
-            margin: 12,
-            speed: .8
-        },
-        {
-            margin: 500,
-            speed: 1
-        }
+        { margin: -5, speed: 1.2 },
+        { margin: 0, speed: 1 },
+        { margin: 6, speed: 1 },
+        { margin: 12, speed: .8 },
+        { margin: 500, speed: 1 }
     ];
     var TEXT_GAME_OVER = 'GAME OVER';
     var TEXT_GO = 'Go';
