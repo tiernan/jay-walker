@@ -36,7 +36,7 @@ interface ServiceWorkerContainer {
 	onmessage?: (event?: Event) => any;
 	ready: Promise<ServiceWorkerRegistration>;
 	getRegistration(scope?: string): Promise<ServiceWorkerRegistration>;
-	getRegistrations(): Promise<Array<ServiceWorkerRegistration>>;
+	getRegistrations(): Promise<ServiceWorkerRegistration[]>;
 	register(url: string, options?: ServiceWorkerRegistrationOptions): Promise<ServiceWorkerRegistration>;
 }
 
@@ -51,7 +51,7 @@ interface ServiceWorkerRegistration {
 	pushManager: PushManager;
 	scope: string;
 	waiting?: ServiceWorker;
-	getNotifications(options?: ServiceWorkerNotificationOptions): Promise<Array<Notification>>;
+	getNotifications(options?: ServiceWorkerNotificationOptions): Promise<Notification[]>;
 	update(): void;
 	unregister(): Promise<boolean>;
 }
@@ -66,18 +66,18 @@ type ServiceWorkerState = "installing" | "installed" | "activating" | "activated
 
 interface Cache {
 	add(request: Request): Promise<void>;
-	addAll(requestArray: Array<Request>): Promise<void>;
+	addAll(requests: Request[]): Promise<void>;
 	'delete'(request: Request, options?: CacheStorageOptions): Promise<boolean>;
-	keys(request?: Request, options?: CacheStorageOptions): Promise<Array<string>>;
+	keys(request?: Request, options?: CacheStorageOptions): Promise<string[]>;
 	match(request: Request, options?: CacheStorageOptions): Promise<Response>;
-	matchAll(request: Request, options?: CacheStorageOptions): Promise<Array<Response>>;
+	matchAll(request: Request, options?: CacheStorageOptions): Promise<Response[]>;
 	put(request: Request|string, response: Response): Promise<void>;
 }
 
 interface CacheStorage {
 	'delete'(cacheName: string): Promise<boolean>;
 	has(cacheName: string): Promise<boolean>;
-	keys(): Promise<Array<string>>;
+	keys(): Promise<string[]>;
 	match(request: Request, options?: CacheStorageOptions): Promise<Response>;
 	open(cacheName: string): Promise<Cache>;
 }
@@ -100,7 +100,7 @@ interface Client {
 interface Clients {
 	claim(): Promise<any>;
 	get(id: string): Promise<Client>;
-	matchAll(options?: ClientMatchOptions): Promise<Array<Client>>;
+	matchAll(options?: ClientMatchOptions): Promise<Client[]>;
 	openWindow(url: string): Promise<WindowClient>;
 }
 
@@ -147,13 +147,13 @@ interface Headers {
 	new(init?: any): Headers;
 	append(name: string, value: string): void;
 	'delete'(name: string): void;
-	entries(): Array<Array<string>>;
+	entries(): string[][];
 	get(name: string): string;
-	getAll(name: string): Array<string>;
+	getAll(name: string): string[];
 	has(name: string): boolean;
-	keys(): Array<string>;
+	keys(): string[];
 	set(name: string, value: string): void;
-	values(): Array<string>;
+	values(): string[];
 }
 
 interface Request extends Body {
