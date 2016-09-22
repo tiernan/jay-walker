@@ -94,7 +94,7 @@ namespace JayWalker {
 	const KEY_UP: number = 38;
 
 	const LOG_BAD_FPS: string = 'Severe FPS drop!';
-	const LOG_CHEATER: string = 'CHEATER!';
+	const LOG_1UP: string = '1-Up!';
 	const LOG_DISABLED: string = 'Disabled';
 	const LOG_ENABLED: string = 'Enabled';
 	const LOG_KEY_INVALID: string = 'Invalid key: ';
@@ -348,7 +348,7 @@ namespace JayWalker {
 				break;
 			case KEY_9:
 				if (!userVictory && running) {
-					console.log(LOG_CHEATER);
+					console.log(LOG_1UP);
 					userCheated = true;
 					lives++;
 					tm.drawLives(lives);
