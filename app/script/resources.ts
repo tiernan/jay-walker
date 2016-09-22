@@ -9,8 +9,8 @@ namespace JayWalker {
 
 		function _preload(url: string): Promise<HTMLImageElement> {
 			return new Promise(function (
-				resolve: (value?: PromiseLike<HTMLImageElement> | HTMLImageElement) => HTMLImageElement,
-				reject: (value?: PromiseLike<HTMLImageElement> | HTMLImageElement) => HTMLImageElement
+				resolve: (value?: Promise<HTMLImageElement> | HTMLImageElement) => HTMLImageElement,
+				reject: (value?: Promise<HTMLImageElement> | HTMLImageElement) => HTMLImageElement
 			): void {
 				if (resourceCache[url]) {
 					resolve(resourceCache[url]);
