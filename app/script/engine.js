@@ -235,9 +235,9 @@ var JayWalker;
                     userPause();
                 }
                 return;
-            case KEY_LEFT: // left
-            case KEY_UP: // up
-            case KEY_RIGHT: // right
+            case KEY_LEFT:
+            case KEY_UP:
+            case KEY_RIGHT:
             case KEY_DOWN:
                 JayWalker.userKeys[e.keyCode] = false;
                 break;
@@ -672,7 +672,7 @@ var JayWalker;
         tm.queueText(levelData.name, 1);
         // adds the 'Ready, Set, Go'
         startText();
-        // render bg/player and launch start the loop
+        // render bg/player and start the loop
         renderBg();
         render();
         userLive = true;
