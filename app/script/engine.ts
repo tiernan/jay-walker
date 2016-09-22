@@ -39,10 +39,6 @@ namespace JayWalker {
 		speed: number;
 	}
 
-	interface Origin {
-		[index: number]: number;
-	}
-
 	interface EnemyData {
 		delay: number;
 		mode: number;
@@ -65,6 +61,10 @@ namespace JayWalker {
 		material: string;
 		speed: number;
 		reverse: boolean;
+	}
+
+	interface Origin {
+		[index: number]: number;
 	}
 
 	// constants
@@ -115,27 +115,12 @@ namespace JayWalker {
 	const NUM_MIN_FPS: number = 45;
 	const NUM_SECOND: number = 1000;
 
-	const SETTINGS_DIFFICULTY: Array<Difficulty> = [
-		{
-			margin: -5,
-			speed: 1.2
-		},
-		{
-			margin: 0,
-			speed: 1
-		},
-		{
-			margin: 6,
-			speed: 1
-		},
-		{
-			margin: 12,
-			speed: .8
-		},
-		{
-			margin: 500,
-			speed: 1
-		}
+	const SETTINGS_DIFFICULTY: Difficulty[] = [
+		{margin: -5, speed: 1.2},
+		{margin: 0, speed: 1},
+		{margin: 6, speed: 1},
+		{margin: 12, speed: .8},
+		{margin: 500, speed: 1}
 	];
 
 	const TEXT_GAME_OVER: string = 'GAME OVER';
