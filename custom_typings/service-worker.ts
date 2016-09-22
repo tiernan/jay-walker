@@ -66,7 +66,7 @@ type ServiceWorkerState = "installing" | "installed" | "activating" | "activated
 
 interface Cache {
 	add(request: Request): Promise<void>;
-	addAll(requests: Request[]): Promise<void>;
+	addAll(requests: Request[]|string[]): Promise<void>;
 	'delete'(request: Request, options?: CacheStorageOptions): Promise<boolean>;
 	keys(request?: Request, options?: CacheStorageOptions): Promise<string[]>;
 	match(request: Request, options?: CacheStorageOptions): Promise<Response>;
