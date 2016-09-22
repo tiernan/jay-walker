@@ -1,1 +1,0 @@
-JayWalker.data['data/config.json']={"width":10,"height":6,"cellWidth":101,"cellHeight":83,"cellOffsetX":16,"cellOffsetY":52,"baseSpeed":1,"levels":["levels/tx1.json","levels/tx2.json","levels/tx3.json"]}
