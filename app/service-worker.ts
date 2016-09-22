@@ -1,76 +1,66 @@
 /// <reference path="../custom_typings/service-worker.ts" />
 'use strict';
+const APP: string = 'jay-walker';
+const MANIFEST: string = 'files-manifest.json';
+const VERSION: string = '1.0.0';
 
-let version: string = '0.1.0';
-let manifest: string = 'files-manifest.json';
+let cacheID: string = APP + '-' + VERSION;
+let cacheEnabled: boolean = true;
 
-self.addEventListener('install', function(event: ExtendableEvent): void {
-	event.waitUntil(Promise.all([
-			caches.open(version).then(function(cache: Cache): Promise<void> {
-				let preloadRequest: Request = new Request(manifest);
-				return fetch(preloadRequest).then(function(response: Response): Promise<void> {
-					if (response.ok) {
-						cache.put(preloadRequest, response.clone());
-						let contentType: string = response.headers.get('content-type');
-						if (contentType && contentType.indexOf('application/json') !== -1) {
-							return response.json().then(function(json: Array<Request>): Promise<void> {
-								return cache.addAll(json);
-							}).catch(function(): Promise<boolean> {
-								// bad JSON, resolve anyway
-								console.log('Warning: Manifest malformed, skipping preload');
-								return Promise.resolve(false);
-							});
-						} else {
-							console.log('Warning: Manifest Content-Type mismatch.');
-							return Promise.resolve();
-						}
-					} else {
-						console.log('Notice: No manifest present; presuming dev version.');
-						return Promise.resolve();
-					}
-				}).catch(function(error: Error): void {
-					console.log('Warning: network error during install');
-					throw error;
+self.addEventListener('install', function (event: ExtendableEvent): void {
+	let preloadRequest: Request = new Request(MANIFEST);
+	event.waitUntil(
+		fetch(preloadRequest)
+		.then(function (response: Response): Promise<string[]> {
+			if (response.ok) {
+				return response.json();
+			} else {
+				console.log('Notice: No manifest present; presuming dev version.');
+				cacheEnabled = false;
+				return Promise.resolve([]);
+			}
+		})
+		.then(function (json: string[]): Promise<void> {
+			if (Array.isArray(json)) {
+				return caches.open(cacheID)
+				.then(function (cache: Cache): Promise<void> {
+					return cache.addAll(json);
 				});
-			}),
-			skipWaiting()
-		]
-	));
+			} else {
+				return Promise.reject(new Error('Manifest is not an array'));
+			}
+		})
+	);
 });
 
-self.addEventListener('activate', function(event: ExtendableEvent): void {
-	event.waitUntil(caches.keys().then(function(cacheNames: Array<string>): Promise<Promise<boolean>[]> {
-		return Promise.all(
-			cacheNames.map(function(cacheName: string): Promise<boolean> {
-				if (cacheName !== version) {
-					console.log('Deleting old cache:', cacheName);
+self.addEventListener('activate', function (event: ExtendableEvent): void {
+	event.waitUntil(
+		caches.keys()
+		.then(function (cacheNames: Array<string>): Promise<Promise<boolean>[]> {
+			return Promise.all(cacheNames.map(function (cacheName: string): Promise<boolean> {
+				if (cacheName.startsWith(APP) && cacheName !== cacheID) {
 					return caches.delete(cacheName);
 				}
-			})
-		);
-	}).then(function(): void {
-		clients.claim();
-	}));
+			}));
+		})
+	);
 });
 
-self.addEventListener('fetch', function(event: FetchEvent): void {
-	event.respondWith(caches.open(version)
-		.then(function(cache: Cache): Promise<Response> {
-		return cache.match(event.request).then(function(cacheResponse: Response): Promise<Response>|Response {
-			return cacheResponse || fetch(event.request).then(
-					function(response: Response): Response {
-						if (response.ok) {
+self.addEventListener('fetch', function (event: FetchEvent): void {
+	event.respondWith(
+		caches.open(cacheID)
+		.then(function (cache: Cache): Promise<Response> {
+			return cache.match(event.request)
+			.then(function (cacheResponse: Response): Promise<Response>|Response {
+				return cacheResponse ||
+					fetch(event.request)
+					.then(function (response: Response): Response {
+						if (cacheEnabled && response.ok) {
 							cache.put(event.request, response.clone());
-						} else {
-							console.log('Warning: Bad Response for url: ' + response.url);
 						}
 						return response;
-					}
-				).catch(
-					function(error: Error): void {
-						throw error;
-					}
-				);
-		});
-	}));
+					});
+			});
+		})
+	);
 });
