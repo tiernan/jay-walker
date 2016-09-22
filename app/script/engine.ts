@@ -50,7 +50,7 @@ namespace JayWalker {
 	}
 
 	interface LevelData {
-		layout: Array<LayoutRow>;
+		layout: LayoutRow[];
 		name: string;
 		origin: Origin;
 		startFrame: number;
@@ -61,7 +61,7 @@ namespace JayWalker {
 	}
 
 	interface LayoutRow {
-		enemies: Array<EnemyData>;
+		enemies: EnemyData[];
 		material: string;
 		speed: number;
 		reverse: boolean;
@@ -173,7 +173,7 @@ namespace JayWalker {
 	let inputEnabled: boolean = false;
 	let userCheated: boolean = false;
 	let player: Player;
-	let allEnemies: Array<Enemy> = [];
+	let allEnemies: Enemy[] = [];
 	let difficultyOffset: number = 0;
 	let layout: Layout = [];
 	let origin: GamePosition;
