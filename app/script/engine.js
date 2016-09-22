@@ -45,7 +45,7 @@ var JayWalker;
     var KEY_SPACE = 32;
     var KEY_UP = 38;
     var LOG_BAD_FPS = 'Severe FPS drop!';
-    var LOG_CHEATER = 'CHEATER!';
+    var LOG_1UP = '1-Up!';
     var LOG_DISABLED = 'Disabled';
     var LOG_ENABLED = 'Enabled';
     var LOG_KEY_INVALID = 'Invalid key: ';
@@ -281,7 +281,7 @@ var JayWalker;
                 break;
             case KEY_9:
                 if (!userVictory && running) {
-                    console.log(LOG_CHEATER);
+                    console.log(LOG_1UP);
                     userCheated = true;
                     lives++;
                     tm.drawLives(lives);
