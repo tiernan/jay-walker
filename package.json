@@ -4,6 +4,10 @@
   "description": "A simple arcade game clone.",
   "author": "Tiernan Cridland",
   "license": "ISC",
+  "scripts": {
+    "start": "gulp",
+    "build": "gulp build"
+  },
   "devDependencies": {
     "compression": "^1.6.2",
     "escape-string-regexp": "^1.0.5",
