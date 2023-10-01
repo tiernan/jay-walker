@@ -6,7 +6,7 @@ A simple arcade game clone.
 
 ### Game Features
 
-- 3 step collision detection using grid proximity, sprite box, and tangential collision respectively.
+- Three-step collision detection using grid proximity, sprite box, and tangential collision respectively.
 - Angular blood effects taking into account the players collision angle with an object.
 - Optimized memory management. There are extremely few new objects/functions allocated during play.
 - Use of Promises/A+ for preloading assets.
@@ -26,28 +26,70 @@ A simple arcade game clone.
 
 All current desktop browsers are supported. The application uses JavaScript Promises and therefore is not compatible with Microsoft Internet Explorer.
 
+## How to Build
+
+To build the game, you will need to install either:
+- [PNPM](#pnpm) (recommended)
+- [Yarn](#yarn)
+- [NPM](#npm)
+
+### PNPM
+
+PNPM is an alternative to NPM that is faster and more efficient. It is recommended to use PNPM for this project.
+You can install PNPM by following the instructions on their website: [https://pnpm.io/installation](https://pnpm.io/installation)
+
+After installation, you can build the game by running the following commands in your terminal:
+
+```bash
+pnpm install
+pnpm run build
+```
+
+### Yarn
+
+Yarn is an alternative to NPM that is faster and more efficient. You can install Yarn by following the instructions on
+their website: [https://yarnpkg.com/getting-started/install](https://yarnpkg.com/getting-started/install)
+
+After installation, you can build the game by running the following commands in your terminal:
+
+```bash
+yarn install
+yarn run build
+```
+
+### NPM
+
+If you do not wish to use PNPM or Yarn, you can use NPM instead. You can install NPM by following the instructions on
+their website: [https://docs.npmjs.com/downloading-and-installing-node-js-and-npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+
+After installation, you can build the game by running the following commands in your terminal:
+
+```bash
+npm install
+npm run build
+```
+
+> :warning: **If you are using NPM with a node version lower than 16.14**: You will need to add the following to your
+> `package.json` file under the "scripts" section: `"preinstall": "npx npm-force-resolutions"`.
+
 ## How to Run
 
-There are three ways to run this application.
+To run the game, simply open the index.html file in your favorite browser.
 
-- Build then open [dist/index.html](dist/index.html) locally in your favourite browser.
-- Use gulp to serve the files locally.
-- Access a live version at [udacity.tiernanx.com/fewd/arcade/](http://udacity.tiernanx.com/fewd/arcade/)
+## How to Run Locally with Gulp
 
-### How to Run Locally with Gulp
+You can run the game locally using gulp with the following commands:
 
-Simply, follow the steps below to launch a simple local server:
+```bash
+pnpm run start
+```
 
-1. Extract this archive where you desire.
-2. First install [NPM](https://www.npmjs.com/).
-3. Follow steps 1-5 in your OS's terminal (node.js command line in windows).
-3. Install gulp's cli by entering the command `npm install --global gulp-cli`.
-4. Navigate to the directory where you extracted the files, then enter the command `npm install`
-5. Now to launch a local server, enter `gulp`
-6. You should now be able to access the website at [localhost:8080](http://localhost:8080)
+or
 
-Once done, press Ctrl + C in the terminal to tell gulp to stop serving.
-Unzip this entire archive, then open index.html with your favorite browser.
+```bash
+pnpm install --global gulp-cli
+gulp
+```
 
 ## Controls
 
@@ -68,7 +110,7 @@ Use the arrow keys to navigate around the playing field.
 3. Easy Mode (smaller collision radius)
 4. Wimp Mode (slower enemies, very small collision radius)
 5. God Mode (invulnerability)
-6. Blood Toggle (PEGI 13!)
+6. Blood Toggle (PEGI 13)
 7. Leave Trails (disable clearing before redraw)
 8. Pixelate (render at 1/4 resolution)
 9. 1-UP (for those stuck)
@@ -80,6 +122,10 @@ You can modify the levels and/or create new levels by changing the JSON files un
 JSON Schema's are provided to validate against in the /schemas directory.
 
 After modification, you should rebuild the distribution build by using the `gulp build` command in an NPM enabled terminal. (See 'How to Run Locally with Gulp' steps 1-4 above to install Gulp and dependencies)
+
+## Change Log
+
+Please refer to [CHANGELOG.md](CHANGELOG.md) for information on what has changed recently.
 
 ## Credits
 
