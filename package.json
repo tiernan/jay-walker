@@ -25,5 +25,16 @@
     "sass": "^1.68.0",
     "slash": "^1.0.0",
     "through2": "^2.0.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "graceful-fs": "^4.2.11"
+    }
+  },
+  "resolutions": {
+    "graceful-fs": "^4.2.11"
+  },
+  "overrides": {
+    "graceful-fs": "^4.2.11"
   }
 }
