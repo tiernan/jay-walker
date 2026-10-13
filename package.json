@@ -9,7 +9,7 @@
     "build": "gulp build"
   },
   "devDependencies": {
-    "compression": "^1.6.2",
+    "compression": "^1.8.2",
     "escape-string-regexp": "^1.0.5",
     "gulp": "^3.9.1",
     "gulp-clean-css": "^2.0.11",
